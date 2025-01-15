@@ -1,0 +1,390 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <mat-tab-group mat-align-tabs="start" [selectedIndex]="tabIndex">
+                    <mat-tab label="Loans">
+                        <div class="card">
+                            <div class="card-header card-header-rose card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">perm_identity</i>
+                                </div>
+                                <h4 class="card-title">Loan List</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="toolbar">
+                                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                </div>
+                                <div class="material-datatables">
+                                    <div class="table-responsive">
+                                        <div class="example-container mat-elevation-z8">
+                                            <div class="example-header d-flex flex-row-reverse">
+                                                <mat-form-field>
+                                                    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                                                </mat-form-field>
+                                            </div>
+                                            <mat-table [dataSource]="dataSourceLoan" matSort>
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="name">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.name}} {{row.lastName}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Email Column -->
+                                                <ng-container matColumnDef="email">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Cellphone Column -->
+                                                <ng-container matColumnDef="cellphone">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Cellphone </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.cellphone}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Profile Column -->
+                                                <ng-container matColumnDef="profileName">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Profile Name </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.profileName}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Actions Column -->
+                                                <ng-container matColumnDef="actions">
+                                                    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">
+                                                        <button mat-raised-button type="button" (click)="redirectToEdit(row, 'loan')" class="btn btn-link btn-warning btn-just-icon edit-user" title="editar">
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
+                                                        <button mat-raised-button type="button" (click)="onDelete(row)" class="btn btn-link btn-danger btn-just-icon remove-user" title="eliminar">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                    </mat-cell>
+                                                </ng-container>
+
+                                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                            </mat-table>
+
+                                            <mat-paginator class="mt-2" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <button mat-raised-button routerLink="/users/add-upd-loan" type="button" class="btn btn-primary" title="Add Loan">Add Loan</button>
+                            </div>
+                            <!-- end content-->
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Realtors">
+
+                        <div class="card">
+                            <div class="card-header card-header-rose card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">perm_identity</i>
+                                </div>
+                                <h4 class="card-title">Realtos List</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="toolbar">
+                                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                </div>
+                                <div class="material-datatables">
+                                    <div class="table-responsive">
+                                        
+
+                                        <div class="example-container mat-elevation-z8">
+                                            <div class="example-header d-flex flex-row-reverse">
+                                                <mat-form-field>
+                                                    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                                                </mat-form-field>
+                                            </div>
+                                            <mat-table [dataSource]="dataSourceRealtor" matSort>
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="name">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.name}} {{row.lastName}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Email Column -->
+                                                <ng-container matColumnDef="email">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Cellphone Column -->
+                                                <ng-container matColumnDef="cellphone">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Cellphone </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.cellphone}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Profile Column -->
+                                                <ng-container matColumnDef="profileName">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Profile </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.profileName}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Actions Column -->
+                                                <ng-container matColumnDef="actions">
+                                                    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">
+                                                        <button mat-raised-button type="button" (click)="redirectToEdit(row, 'realtor')" class="btn btn-link btn-warning btn-just-icon edit-user" title="editar">
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
+                                                        <button mat-raised-button type="button" (click)="onDelete(row)" class="btn btn-link btn-danger btn-just-icon remove-user" title="eliminar">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                    </mat-cell>
+                                                </ng-container>
+
+                                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                            </mat-table>
+
+
+                                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button mat-raised-button routerLink="/users/add-upd-realtor" type="button" class="btn btn-primary" title="Add Realtor">Add Realtor</button>
+                            </div>
+                            <!-- end content-->
+                        </div>
+
+
+                    </mat-tab>
+                    <mat-tab label="Clients">
+
+                        <div class="card">
+                            <div class="card-header card-header-rose card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">perm_identity</i>
+                                </div>
+                                <h4 class="card-title">Clients List</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="toolbar">
+                                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                </div>
+                                <div class="material-datatables">
+                                    <div class="table-responsive">
+                                        <div class="example-container mat-elevation-z8">
+                                            <div class="example-header d-flex flex-row-reverse">
+                                                <mat-form-field>
+                                                    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                                                </mat-form-field>
+                                            </div>
+                                            <mat-table [dataSource]="dataSourceClient" matSort>
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="name">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.name}} {{row.lastName}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Email Column -->
+                                                <ng-container matColumnDef="email">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Cellphone Column -->
+                                                <ng-container matColumnDef="cellphone">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Cellphone </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.cellphone}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Profile Column -->
+                                                <ng-container matColumnDef="profileName">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Profile </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.profileName}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Actions Column -->
+                                                <ng-container matColumnDef="actions">
+                                                    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">
+                                                        <button mat-icon-button [matMenuTriggerFor]="menuProperties" aria-label="Properties Menu">
+                                                            <mat-icon>more_vert</mat-icon>
+                                                        </button>
+                                                        <mat-menu #menuProperties="matMenu">
+                                                            <button (click)="redirectToEdit(row, 'client')" mat-menu-item>
+                                                                <mat-icon>edit</mat-icon>
+                                                                <span>Edit</span>
+                                                            </button>
+                                                            <button mat-menu-item (click)="onDelete(row)">
+                                                                <mat-icon>delete</mat-icon>
+                                                                <span>Delete</span>
+                                                            </button>
+                                                        </mat-menu>
+                                                    </mat-cell>
+                                                </ng-container>
+
+                                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                            </mat-table>
+                                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <button mat-raised-button routerLink="/users/add-upd-client" type="button" class="btn btn-primary" title="Add Client">Add Client</button>
+                            </div>
+                            <!-- end content-->
+                        </div>
+
+
+                    </mat-tab>
+                    <mat-tab label="Viewers">
+
+                        <div class="card">
+                            <div class="card-header card-header-rose card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">perm_identity</i>
+                                </div>
+                                <h4 class="card-title">Viewers List</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="toolbar">
+                                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                </div>
+                                <div class="material-datatables">
+                                    <div class="table-responsive">
+                                        <div class="example-container mat-elevation-z8">
+                                            <div class="example-header d-flex flex-row-reverse">
+                                                <mat-form-field>
+                                                    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                                                </mat-form-field>
+                                            </div>
+                                            <mat-table [dataSource]="dataSourceViewer" matSort>
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="name">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.name}} {{row.lastName}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Email Column -->
+                                                <ng-container matColumnDef="email">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Cellphone Column -->
+                                                <ng-container matColumnDef="cellphone">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Cellphone </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.cellphone}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Profile Column -->
+                                                <ng-container matColumnDef="profileName">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Profile </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.profileName}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Actions Column -->
+                                                <ng-container matColumnDef="actions">
+                                                    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">
+                                                        <button mat-raised-button type="button" (click)="redirectToEdit(row, 'viewer')" class="btn btn-link btn-warning btn-just-icon edit-user" title="editar">
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
+                                                        <button mat-raised-button type="button" (click)="onDelete(row)" class="btn btn-link btn-danger btn-just-icon remove-user" title="eliminar">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                    </mat-cell>
+                                                </ng-container>
+
+                                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                            </mat-table>
+
+                                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <button mat-raised-button routerLink="/users/add-upd-user/VIEWER" type="button" class="btn btn-primary" title="Add Viewer">Add Viewer</button>
+                            </div>
+                            <!-- end content-->
+                        </div>
+
+                    </mat-tab>
+
+                    <mat-tab label="Administrators">
+
+                        <div class="card">
+                            <div class="card-header card-header-rose card-header-icon">
+                                <div class="card-icon">
+                                    <i class="material-icons">perm_identity</i>
+                                </div>
+                                <h4 class="card-title">Administrators List</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="toolbar">
+                                    <!--        Here you can write extra buttons/actions for the toolbar              -->
+                                </div>
+                                <div class="material-datatables">
+                                    <div class="table-responsive">
+                                        <div class="example-container mat-elevation-z8">
+                                            <div class="example-header d-flex flex-row-reverse">
+                                                <mat-form-field>
+                                                    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+                                                </mat-form-field>
+                                            </div>
+                                            <mat-table [dataSource]="dataSourceAdministrators" matSort>
+                                                <!-- Name Column -->
+                                                <ng-container matColumnDef="name">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.name}} {{row.lastName}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Email Column -->
+                                                <ng-container matColumnDef="email">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.email}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Cellphone Column -->
+                                                <ng-container matColumnDef="cellphone">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Cellphone </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.cellphone}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Profile Column -->
+                                                <ng-container matColumnDef="profileName">
+                                                    <mat-header-cell *matHeaderCellDef mat-sort-header> Profile </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">{{row.profileName}}</mat-cell>
+                                                </ng-container>
+
+                                                <!-- Actions Column -->
+                                                <ng-container matColumnDef="actions">
+                                                    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                                                    <mat-cell *matCellDef="let row">
+                                                        <button mat-raised-button type="button" (click)="redirectToEdit(row , 'admin')" class="btn btn-link btn-warning btn-just-icon edit-user" title="editar">
+                                                            <i class="material-icons">edit</i>
+                                                        </button>
+                                                        <button mat-raised-button type="button" (click)="onDelete(row)" class="btn btn-link btn-danger btn-just-icon remove-user" title="eliminar">
+                                                            <i class="material-icons">close</i>
+                                                        </button>
+                                                    </mat-cell>
+                                                </ng-container>
+
+                                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                            </mat-table>
+                                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button mat-raised-button routerLink="/users/add-upd-user/ADMINISTRATOR" type="button" class="btn btn-primary" title="Add Administrator">Add Administrator</button>
+                            </div>
+                            <!-- end content-->
+                        </div>
+
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+    </div>
+</div>
